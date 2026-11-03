@@ -12,7 +12,7 @@ return new class extends Migration
             $table->increments('id_produit');
             $table->string('label_produit');
             $table->text('description_produit');
-            $table->string('type_produit');
+            $table->enum('type_produit',["OEUF","POULE","DECHET","NUTRITION"])->default("POULE");
             $table->integer('quantite_produit');
             $table->decimal('prix_produit', 12, 2);
 
