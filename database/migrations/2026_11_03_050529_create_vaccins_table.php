@@ -1,0 +1,23 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('vaccins', function (Blueprint $table) {
+            $table->increments('id_vaccin');
+            $table->string('label_vaccin');
+            $table->integer('prix_vaccin');
+            $table->timestamps();
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('vaccins');
+    }
+};
