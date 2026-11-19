@@ -21,13 +21,25 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = Users::create($request->all());
-        if ($user) {
-            return response()->json(['message' => 'User created successfully'], 201);
-        } else {
-            return response()->json(['message' => 'Failed to create user'], 500);
-        }
+        $validated = $request->validate([
+            'nom_user' => 'required|string|max:255',
+            'prenom_user' => 'required|string|max:255',
+            'email_user' => 'required|email',
+            'phone_user' => 'required|string|max:20',
+            'sexe' => 'required|string',
+            'login_user' => 'required|string',
+            'statut_user' => 'required|string',
+            'password_user' => 'required|string|min:8',
+        ]);
 
+        $validated['password_user'] = bcrypt($validated['password_user']);
+
+        $user = Users::create($validated);
+
+        return response()->json([
+            'message' => 'User created successfully',
+            'data' => $user
+        ], 201);
     }
 
     /**
@@ -48,10 +60,20 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $validated = $request->validate([
+            'nom_user' => 'sometimes|required|string|max:255',
+            'prenom_user' => 'sometimes|required|string|max:255',
+            'email_user' => 'sometimes|required|email',
+            'phone_user' => 'sometimes|required|string|max:20',
+            'sexe' => 'sometimes|required|string',
+            'login_user' => 'sometimes|required|string',
+            'statut_user' => 'sometimes|required|string',
+            'password_user' => 'sometimes|required|string|min:8',
+        ]);
         $user = Users::find($id);
 
         if ($user) {
-            $resp = $user->update($request->all());
+            $resp = $user->update($validated);
             if ($resp) {
                 return response()->json(['message' => 'User updated successfully']);
             } else {
