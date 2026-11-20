@@ -17,8 +17,8 @@ Route::apiResource('vaccins', VaccinsController::class);
 Route::apiResource('commandes', CommandesController::class);
 Route::apiResource('produits', ProduitsController::class);
 
-Route::post('/user', [UserController::class, 'store']);
-Route::get('/user/{user}', [UserController::class, 'show']);
-Route::put('/user/{user}', [UserController::class, 'update']);
-Route::patch('/user/{user}', [UserController::class, 'update']);
-Route::delete('/user/{user}', [UserController::class, 'destroy']);
+// Route::post('/user', [UserController::class, 'store']);
+// Route::get('/user/{id}', [UserController::class, 'show']);
+// Route::put('/user/{id}', [UserController::class, 'update']);
+// Route::patch('/user/{id}', [UserController::class, 'update']);
+// Route::delete('/user/{id}', [UserController::class, 'destroy']);
